@@ -1,0 +1,3 @@
+CREATE USER me WITH PASSWORD 'root';
+CREATE DATABASE js_training;
+GRANT ALL PRIVILEGES ON DATABASE "js_training" to me;
