@@ -12,7 +12,8 @@
     "seed-run": "knex seed:run --knexfile knexfile.js",
     "migrate-make": "knex migrate:make",
     "seed-make": "knex seed:make",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -29,8 +30,8 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.14.12",
     "mocha": "1.20.1",
+    "nodemon": "^1.14.12",
     "supertest": "0.13.0"
   },
   "pre-commit": [

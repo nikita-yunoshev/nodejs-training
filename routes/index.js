@@ -6,7 +6,7 @@ const usersRouter = require('./users');
 router.use('/users', usersRouter);
 
 router.get('/', (req, res) => {
-  res.send("hello world");
+  res.send('hello world');
 });
 
 module.exports = router;
