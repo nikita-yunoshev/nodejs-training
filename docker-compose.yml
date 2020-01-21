@@ -1,23 +1,25 @@
 version: "3"
+
 services:
-  db:
-    build:
-      context: ./database
-    container_name: postgres
-    ports:
-      - "5434:5432"
-  app:
+  node:
     build: .
-    container_name: nodejs
+    container_name: node
     depends_on:
-      - db
-    links:
-      - db
+      - postgres
     ports:
       - "3000:3000"
     environment:
-      PSQL_HOST: db
+      PSQL_HOST: postgres
     volumes:
       - .:/app/
       - /app/node_modules
+
+  postgres:
+    container_name: postgres
+    image: postgres:10.6
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./service-files/db:/docker-entrypoint-initdb.d/
+      - ./service-files/postgres-data:/var/lib/postgresql/data
 

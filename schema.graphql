@@ -1,0 +1,27 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    createUser(email: String!, name: String!, password: String!, roleId: Int!): User!
+    deleteUser(id: ID!): Boolean!
+    hello(message: String): String
+    updateUser(email: String, id: ID!, name: String, password: String, roleId: Int): User!
+}
+
+type Query {
+    hello: String
+    user(userId: Int): User
+    users: [User]
+}
+
+type User {
+    email: String
+    id: Int
+    name: String
+    password: String
+    roleId: Int
+}

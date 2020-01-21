@@ -1,0 +1,31 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "rules": {
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "next",
+      "ignoreRestSiblings": true
+    }],
+    "import/order": ["error", {
+      "newlines-between": "always"
+    }],
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies" : true }],
+    "no-underscore-dangle": 0,
+    "no-restricted-syntax": [
+      "error",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "no-await-in-loop": 0,
+    "max-classes-per-file": ["error", 3]
+  }
+}

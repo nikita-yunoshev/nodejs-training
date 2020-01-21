@@ -1,22 +1,64 @@
-const createError = require('http-errors');
-const express = require('express');
 const path = require('path');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const createError = require('http-errors');
+const express = require('express');
+const { Model } = require('objection');
+const fileUpload = require('express-fileupload');
+const passport = require('passport');
+const graphqlHTTP = require('express-graphql');
+const { makeExecutableSchema } = require('graphql-tools');
+
+const knex = require('./src/db');
+const usersRouter = require('./src/routes/users');
+const authRouter = require('./src/routes/auth');
+const UserService = require('./src/services/userService');
+require('./src/config/passport');
+
+Model.knex(knex);
 
 const app = express();
 
+app.use(passport.initialize());
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'jade');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './public')));
+app.use(fileUpload());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
+
+const userService = new UserService();
+let typeDefs = [`
+  type Query {
+    hello: String
+  }
+     
+  type Mutation {
+    hello(message: String): String
+  }
+`];
+const resolvers = {
+  Query: {
+  },
+  Mutation: {
+  },
+};
+
+typeDefs += userService.configTypeDefs();
+userService.configResolvers(resolvers);
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema: makeExecutableSchema({ typeDefs, resolvers }),
+    graphiql: true,
+  }),
+);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

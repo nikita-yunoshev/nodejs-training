@@ -5,33 +5,48 @@
   "author": "Nikita Yunoshev",
   "main": "server.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
-    "migrate-latest": "knex migrate:latest --knexfile knexfile.js",
-    "migrate-rollback": "knex migrate:rollback",
-    "seed-run": "knex seed:run --knexfile knexfile.js",
+    "start": "node bin/www",
+    "devstart": "nodemon bin/www",
+    "migrate-latest": "knex migrate:latest --knexfile knexconfig.js",
+    "migrate-rollback": "nex migrate:rollback",
+    "seed-run": "knex seed:run --knexfile knexconfig.js",
     "migrate-make": "knex migrate:make",
     "seed-make": "knex seed:make",
-    "lint": "eslint ."
+    "lint": "eslint . --fix",
+    "test": "jest --forceExit",
+    "test-integration": "jest src/integration-tests . --runInBand --forceExit --config src/integration-tests/config.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.6",
+    "express-graphql": "^0.9.0",
+    "express-validator": "^6.2.0",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "knex": "^0.20.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.2",
+    "lodash": "^4.17.15",
     "morgan": "~1.9.1",
+    "objection": "^1.6.11",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.12.1"
   },
   "devDependencies": {
+    "easygraphql-tester": "^5.1.6",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "jest": "^23.6.0",
     "nodemon": "^1.14.12",
-    "mocha": "1.20.1",
-    "supertest": "0.13.0"
+    "supertest": "^3.3.0"
   },
   "pre-commit": [
     "lint"
