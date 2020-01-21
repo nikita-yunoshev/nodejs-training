@@ -1,9 +1,10 @@
 const request = require('supertest');
 
 const app = require('../../app');
+const generateRandomString = require('../helpers/stringHelper');
 
 const fixtures = require('./fixtures');
-const generateRandomString = require('../helpers/stringHelper');
+
 let token;
 
 describe('Non-existing route', () => {
@@ -31,7 +32,7 @@ describe('GET users', () => {
     const response = await request(app)
       .get('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       });
 
@@ -45,7 +46,7 @@ describe('GET user', () => {
     const response = await request(app)
       .get(`/users/${fixtures.existingUserStub.id}`)
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       });
 
@@ -59,7 +60,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(fixtures.newUserStub);
@@ -72,7 +73,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userWithoutName);
@@ -95,7 +96,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userWithoutEmail);
@@ -118,7 +119,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userWithoutPassword);
@@ -143,7 +144,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userStub);
@@ -168,7 +169,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userStub);
@@ -191,7 +192,7 @@ describe('POST user', () => {
     const response = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(userWithoutRoleId);
@@ -217,7 +218,7 @@ describe('PATCH user', () => {
     const response = await request(app)
       .patch(`/users/${existingUser.id}`)
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(newEmail);
@@ -231,7 +232,7 @@ describe('PATCH user', () => {
     const response = await request(app)
       .patch(`/users/${fixtures.notExistingUserId}`)
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(newEmail);
@@ -245,7 +246,7 @@ describe('DELETE user', () => {
     const { body: { newUser } } = await request(app)
       .post('/users')
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       })
       .send(fixtures.newUserStub);
@@ -253,7 +254,7 @@ describe('DELETE user', () => {
     const response = await request(app)
       .delete(`/users/${newUser.id}`)
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       });
 
@@ -264,7 +265,7 @@ describe('DELETE user', () => {
     const response = await request(app)
       .delete(`/users/${fixtures.notExistingUserId}`)
       .set({
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'content-type': 'application/json',
       });
 

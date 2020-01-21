@@ -5,6 +5,7 @@ module.exports = class UsersService {
   constructor() {
     this.users = User.query().select('*');
   }
+
   // eslint-disable-next-line class-methods-use-this
   configTypeDefs() {
     let typeDefs = `
@@ -46,15 +47,15 @@ module.exports = class UsersService {
 
   async configResolvers(resolversParam) {
     const resolvers = resolversParam;
-    resolvers.Query.user = async (_, { userId }) => await this.users.findById(userId);
+    resolvers.Query.user = async (_, { userId }) => this.users.findById(userId);
     resolvers.Query.users = async () => this.users;
     resolvers.Mutation.createUser = async (_, userData) => {
       const { password } = userData;
       const hashedPassword = await getHash(password, 10);
 
-      return User.query().insert({...userData, password: hashedPassword});
+      return User.query().insert({ ...userData, password: hashedPassword });
     };
-    resolvers.Mutation.updateUser = async (_, userData) => await User.query().findById(userData.id).patch(userData).returning('*');
-    resolvers.Mutation.deleteUser = async (_, userData) => await User.query().deleteById(userData.id);
+    resolvers.Mutation.updateUser = async (_, userData) => User.query().findById(userData.id).patch(userData).returning('*');
+    resolvers.Mutation.deleteUser = async (_, userData) => User.query().deleteById(userData.id);
   }
 };

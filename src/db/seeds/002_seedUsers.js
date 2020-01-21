@@ -1,6 +1,7 @@
 const tableName = 'users';
-const users = require('./data/users');
 const { getHash } = require('../../helpers/passwordHelper');
+
+const users = require('./data/users');
 
 exports.seed = async (knex) => {
   await knex(tableName).del();

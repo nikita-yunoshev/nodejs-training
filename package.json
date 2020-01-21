@@ -14,7 +14,8 @@
     "seed-make": "knex seed:make",
     "lint": "eslint . --fix",
     "test": "jest --forceExit",
-    "test-integration": "jest src/integration-tests . --runInBand --forceExit --config src/integration-tests/config.js"
+    "test-integration": "jest src/integration-tests . --runInBand --forceExit --config src/integration-tests/config.js",
+    "coverage-test-integration": "jest src/integration-tests . --coverage --runInBand --forceExit --config src/integration-tests/config.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.7",

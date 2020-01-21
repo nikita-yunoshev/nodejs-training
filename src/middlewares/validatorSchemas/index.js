@@ -77,8 +77,8 @@ const logIn = {
   password: {
     in: ['body'],
     errorMessage: 'Please provide password',
-    optional: false
-  }
+    optional: false,
+  },
 };
 
 module.exports = {
