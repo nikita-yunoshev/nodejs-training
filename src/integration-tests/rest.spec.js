@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const app = require('../../app');
+const app = require('../app');
 const generateRandomString = require('../helpers/stringHelper');
 
 const fixtures = require('./fixtures');

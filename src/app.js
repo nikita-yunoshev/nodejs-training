@@ -8,11 +8,10 @@ const passport = require('passport');
 const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
-const knex = require('./src/db');
-const usersRouter = require('./src/routes/users');
-const authRouter = require('./src/routes/auth');
-const UserService = require('./src/services/userService');
-require('./src/config/passport');
+const appRouter = require('./routes');
+const knex = require('./db');
+const UserService = require('./services/userService');
+require('./config/passport');
 
 Model.knex(knex);
 
@@ -29,8 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './public')));
 app.use(fileUpload());
 
-app.use('/auth', authRouter);
-app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter);
+app.use(appRouter);
 
 const userService = new UserService();
 let typeDefs = [`

@@ -8,11 +8,11 @@
     "start": "node bin/www",
     "devstart": "nodemon bin/www",
     "migrate-latest": "knex migrate:latest --knexfile knexconfig.js",
-    "migrate-rollback": "nex migrate:rollback",
+    "migrate-rollback": "knex migrate:rollback",
     "seed-run": "knex seed:run --knexfile knexconfig.js",
     "migrate-make": "knex migrate:make",
     "seed-make": "knex seed:make",
-    "lint": "eslint . --fix",
+    "lint": "eslint ./src --fix",
     "test": "jest --forceExit",
     "test-integration": "jest src/integration-tests . --runInBand --forceExit --config src/integration-tests/config.js",
     "coverage-test-integration": "jest src/integration-tests . --coverage --runInBand --forceExit --config src/integration-tests/config.js"
