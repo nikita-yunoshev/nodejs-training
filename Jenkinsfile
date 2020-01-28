@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Run lint') {
             steps {
-               sh './jenkins.sh'
+               sh 'npm i'
             }
         }
     }
